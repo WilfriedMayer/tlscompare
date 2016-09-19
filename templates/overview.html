@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+
+        function loadDailyData(){
+            return google.visualization.arrayToDataTable([
+                ['Day', 'Results'],
+                {% for day, count in daily_stats %}
+                    ['{{ day }}',{{ count }}]
+                    {% if not loop.last %},{% endif %}
+                {% endfor %}
+            ]);
+        }
+
+        function loadHourlyData(){
+            return google.visualization.arrayToDataTable([
+                ['Hour', 'Results'],
+                {% for hour, count in hourly_stats.iteritems() %}
+                    ['{{ hour }}',{{ count }}]
+                    {% if not loop.last %},{% endif %}
+                {% endfor %}
+            ]);
+        }
+
+        $(document).ready(function(){
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div_daily'));
+            chart.draw(loadDailyData(), {});
+            var chart2 = new google.visualization.LineChart(document.getElementById('chart_div_hourly'));
+            chart2.draw(loadHourlyData(), {});
+        });
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+<h1 id="title">Statistics</h1>
+
+    <h1>Hourly</h1>
+    <div id="chart_div_hourly" style="width: 100%; height: 500px"></div>
+    {#    <table class="table table-bordered table-hover">#}
+    {#        <thead><tr><th>Hour</th><th>Results</th></tr></thead>#}
+    {#        <tbody>#}
+    {#        {% for hour, count in hourly_stats.iteritems() %}#}
+    {#            <tr><td>{{ hour }}</td><td>{{ count }}</td></tr>#}
+    {#        {% endfor %}#}
+    {#        </tbody>#}
+    {#    </table>#}
+
+    <h1>Daily</h1>
+    <div id="chart_div_daily" style="width: 100%; height: 500px"></div>
+    {#    <table class="table table-bordered table-hover">#}
+    {#        <thead><tr><th>Day</th><th>Results</th></tr></thead>#}
+    {#        <tbody>#}
+    {#        {% for day,count in daily_stats %}#}
+    {#            <tr><td>{{ day }}</td><td>{{ count }}</td></tr>#}
+    {#        {% endfor %}#}
+    {#        </tbody>#}
+    {#    </table>#}
+
+    <h1>Overview</h1>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Hours spent to compare</th>
+            <td>{{ hours_wasted }}</td>
+        </tr>
+        <tr>
+        <th>Total Results</th>
+        <td>{{ nr_results }}</td>
+    </tr>
+    <tr>
+        <th>Total Results (this IP)</th>
+        <td>{{ nr_results_ip }}</td>
+    </tr>
+    <tr>
+        <th>Total Results (this session)</th>
+        <td>{{ nr_results_id }}</td>
+    </tr>
+{#    <tr>#}
+{#        <th>False positives found</th>#}
+{#        <td>{{ false_pos }}</td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#        <th>False negatives found</th>#}
+{#        <td>{{ false_neg }}</td>#}
+{#    </tr>#}
+    <tr>
+        <th>Total size of dataset</th>
+        <td>{{ nr_comparisons }}</td>
+    </tr>
+    <tr>
+        <th>Current size of chosen dataset</th>
+        <td>{{ nr_current_dataset }}</td>
+    </tr>
+    <tr>
+        <th>Chosen subset</th>
+        <td>{{ dataset }}</td>
+    </tr>
+</table>
+
+{% endblock %}

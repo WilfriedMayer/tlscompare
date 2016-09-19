@@ -1,0 +1,35 @@
+.btn {
+    width: 150px;
+}
+
+#title {
+    font-size: 4em;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+#buttons {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#expert_buttons {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#expert_buttons div{
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+#contact {
+    padding-bottom: 10px;
+}
+
+div {
+    text-align: center;
+}
+
+.tooltip-wrapper {
+    display: inline-block;
+}

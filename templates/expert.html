@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1 id="title">TLScompare</h1>
+    <div class="visible-xs-block">
+        <p>Help us improve TLS security. Compare an unencrypted counterpart with its encrypted page.<br/><h5>Please use a large screen device.</h5></p>
+    </div>
+    <div class="visible-sm-block visible-md-block visible-lg-block">
+        <p>Help us improve TLS security. Compare an unencrypted counterpart with its encrypted page.<br/>
+            (1) Enable Popups &nbsp;&nbsp; (2) Disable <a href="https://www.eff.org/de/https-everywhere" target="_blank">HTTPS Everywhere</a> if it's installed. &nbsp;&nbsp; (3) Read the <a href=https://tlscompare.org/faq>FAQ</a><br/>
+            You compared <span id="counter">{{ counter }}</span> pages.</p>
+        <div id="expert_buttons">
+            <div>
+                <div class="tooltip-wrapper" data-title="Certificate URL is different to URL">
+                    <button class="btn btn-danger btn_invalid" disabled="" data-reason="certificate-mismatch">Certificate Mismatch</button>
+                </div>
+                <div class="tooltip-wrapper" data-title="Expired certificate, or untrusted by browser">
+                    <button class="btn btn-danger btn_invalid" disabled="" data-reason="untrusted-certificate">Untrusted Certificate</button>
+                </div>
+                <div class="tooltip-wrapper" data-title="Pages do not look similar due to mixed content (CSS, JS)">
+                    <button class="btn btn-danger btn_invalid" disabled="" data-reason="mixed-content">Mixed content</button>
+                </div>
+                <div class="tooltip-wrapper" data-title="Network related errors on either page">
+                    <button class="btn btn-danger btn_invalid" disabled="" data-reason="timeout">Timeout/404/DNS</button>
+                </div>
+                <div class="tooltip-wrapper" data-title="No use in upgrading: pages are not similar, or either page redirects e.g. from HTTP to HTTPS (or vice versa)">
+                    <button class="btn btn-danger btn_invalid" disabled="" data-reason="no-sense">Rule makes no sense</button>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-default btn_start">Compare!</button>
+            </div>
+            <div>
+                <div class="tooltip-wrapper" data-title="Pages look similar, but mixed content warning">
+                    <button class="btn btn-success btn_valid" disabled="" data-reason="mixed-content">Mixed content</button>
+                </div>
+                <div class="tooltip-wrapper" data-title="Pages look similar, no HTTPS warnings">
+                    <button class="btn btn-success btn_valid" disabled="" data-reason="sense">Rule makes sense</button>
+                </div>
+            </div>
+        </div>
+        <div id="comparing" style="display: None;">Currently comparing: <span class="http_url"></span> with <span class="https_url"></span></div>
+        <div id="submit" style="display: None;">Submitted <span class="http_url"></span> and <span class="https_url"></span> as <span class="validity"></span>.</div>
+    </div>
+{% endblock %}

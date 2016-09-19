@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 id="title">FAQ</h1>
+<div>
+    <h3>What is this?</h3>
+    <p>For a project of ours (project <a href=https://www.sba-research.org/research/projects/tlsip/>TLSiP</a>) we need to evaluate a specific subset from the top one million most popular websites. This subset basically allows you to browse the webpages privately and securely, but they are not enforcing it. To improve the overall usage of secure and private communication we want to change that by creating rules for a particular browser extension: <a href=https://www.eff.org/https-everywhere>HTTPSEverywhere</a> by the <a href=https://www.eff.org/>EFF</a> and the <a href=https://www.torproject.org/>Tor</a> project.</p><br>
+
+    <h3>How can I help?</h3>
+    <p>Simple as that: if you have a few minutes, load the page and look at some websites whether or not they seem equal to you. <br><br>Every time you hit "compare" one of our rules is picked at random. The website for this rule is opened twice, once over regular HTTP (to the left) and once over HTTPS (to the right). If they seem equal to you, you can help us to validate our findings by pressing the green "equal" button. If they are not, please press "not equal".</p><br>
+ 
+    <h3>What do I need?</h3>
+    <p>Any web browser should do the job, we tested it on Chrome and Firefox. Please share with us your findings and/or problems by using other browsers.</p><br>
+
+    <h3>What is HTTPS and HTTPSEverywhere?</h3>
+    <p><a href=https://en.wikipedia.org/wiki/HTTPS>HTTPS</a> is a standard for secure communication and implemented in all browsers. If you surf the web and see a padlock somewhere, communication is encrypted and you can be sure you are talking to the correct server. Some recent publications on the security of HTTPS can be found <a href=https://www.feistyduck.com/books/bulletproof-ssl-and-tls/>here</a>, <a href=https://www.ieee-security.org/TC/SP2013/papers/4977a511.pdf>here</a> or <a href=https://fc14.ifca.ai/papers/fc14_submission_100.pdf>here</a>. <br><br><a href=https://www.eff.org/https-everywhere>HTTPSEverywhere</a> is a browser extension for Firefox, Chrome and Opera that can upgrade unencrypted communications to encrypted and secured ones. It uses a manually crafted set of rules to do so. You should install and use it!</p><br>
+
+    <h3>I am not sure what to answer.</h3>
+    <p>If in doubt whether or not the two pages are equal, press "not-equal". At any time you can simply close all three browser windows and start over by surfing to <a href=https://tlscompare.org>tlscompare.org</a></p><br>
+
+    <h3>The two pages seem similar, but different at the same time. How narrow do you define "equal"?</h3>
+    <p>If the structure and the visual impression are the same, this is good enough. Small portions can be different, like ads or other dynamic content.</p><br>
+
+    <h3>One of the pages is redirected (either HTTPS to HTTP, or the other way round). How to answer?</h3>
+    <p>If you use the regular interface, please press "non-equal" - a rule for HTTPSEverywhere would not make sense, however we will manually review these borderline cases specifically</p><br>
+
+    <h3>Why is it so slow?</h3>
+    <p>Sometimes webpages have to be fetched from the other side of the world, this can take some seconds. If nothing happens for more than 10 seconds, please press "not-equal".</p><br>
+
+    <h3>I see the pop-ups, but the pages won't load.</h3>
+    <p>If both windows stay empty for more then 10 seconds, please press "not equal". We will have another look at them.</p><br>
+
+    <h3>Why do I get an error message from Cloudflare?</h3>
+    <p>If you see an error message from Cloudflare, this means most likely that the server is currently not available. It's safe to press "not equal", and we'll have a look at it.</p><br>
+
+    <h3>Why does it say "Please use a large screen device".</h3>
+    <p>This page only makes sense if you have an appropriate display with a large-enough resolution. It doesn't work on smartphones and tablets.</p><br>
+
+    <h3>Why is there no mobile version?</h3>
+    <p>The screen is too small.</p><br>
+
+    <h3>Why is there Porn?</h3>
+    <p>The websites are a random subset of popular websites on the Internet. This includes porn. Viewer discretion is advised, this page is <b>NSFW</b>.</p><br>
+
+    <h3>What information do you collect about me?</h3>
+    <p>Beside the information your browser sends to us by default (UserAgent, operating system, IP adress) we store an encrypted cookie on your side to count the number of solved requests. You can delete this cookie in your browser preferences or by using the private mode of your browser.<br><br>Aside from that we do not use any form of tracking- or analytics service, i.e. no Google Analytics or any other third-party tracking.</p><br>
+
+    <h3>What's the expert mode?</h3>
+    <p>The expert mode is for people that have experience with TLS and HTTPS. This allows us for collecting finer grained answers (like timeouts, certificate errors, ...)</p><br>
+
+    <h3>What are the different rulesets?</h3>
+    <p>By default the most interesting ruleset for us is selected, namely those pages that are somewhere close to being equal but our algorithms weren't sure (named "Generaded rules close to threshold"). The other sets are the current rules of HTTPSEverywhere named "existing rules", which all should be valid and euqal. The third set is "Generated valid rules", which are our contribution back to HTTPSEverywhere and which is by far the biggest dataset needing manual verification.</p><br>
+
+    <h3>I'd like to tell my friends about this. How do I do this?</h3>
+    <p>The more, the merrier! We are working on integrating Facebook and Twitter so that you can share this site with your social peers. Stay tuned for updates.</p><br>
+
+    <h3>My question was not answered - how can I reach you?</h3>
+    <p>Please see the <a href=https://tlscompare.org/contact>contact page</a>.</p><br>
+</div>
+{% endblock %}

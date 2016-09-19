@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1 id="title">TLScompare</h1>
+    <div class="visible-xs-block">
+        <p>Help us improve TLS security. Compare an unencrypted counterpart with its encrypted page.<br/><h5>Please use a large screen device.</h5></p>
+    </div>
+    <div class="visible-sm-block visible-md-block visible-lg-block">
+        <p>Help us improve TLS security. Compare an unencrypted counterpart with its encrypted page.<br/>
+            (1) Enable Popups &nbsp;&nbsp; (2) Disable <a href="https://www.eff.org/de/https-everywhere" target="_blank">HTTPS Everywhere</a> if it's installed. &nbsp;&nbsp; (3) Read the <a href=https://tlscompare.org/faq>FAQ</a><br/>
+            You compared <span id="counter">{{ counter }}</span> pages.</p>
+        <div id="buttons">
+            <button class="btn btn-danger btn_invalid" disabled="">Not equal</button>
+            <button class="btn btn-default btn_start">Compare!</button>
+            <button class="btn btn-success btn_valid" disabled="">Equal</button>
+        </div>
+        <div id="comparing" style="display: None;">Currently comparing: <span class="http_url"></span> with <span class="https_url"></span></div>
+        <div id="submit" style="display: None;">Submitted <span class="http_url"></span> and <span class="https_url"></span> as <span class="validity"></span>.</div>
+    </div>
+{% endblock %}

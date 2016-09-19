@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block container %}
+
+<div class="container" style="margin-left: 10px">
+
+{% for i in range((count//100) + 1) %}
+        {% if page == i %}
+            {{ i + 1 }}
+        {% else %}
+            <a href="{{ request.base_url }}?page={{ i }}">{{ i + 1 }}</a>
+        {% endif %}
+{% endfor %}
+
+{% if comparison %}
+    <h1>Comparison Information</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>CID</th>
+            <th>HTTP URL</th>
+            <th>HTTPS URL</th>
+            <th>similarityvalue1</th>
+            <th>similarityvalue2</th>
+            <th>http_url_id</th>
+            <th>https_url_id</th>
+            <th>rank</th>
+            <th>code</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ stats[0].comparison.id }}</td>
+            <td>{{ stats[0].comparison.http_url }}</td>
+            <td>{{ stats[0].comparison.https_url }}</td>
+            <td>{{ stats[0].comparison.similarityvalue1 }}</td>
+            <td>{{ stats[0].comparison.similarityvalue2 }}</td>
+            <td>{{ stats[0].comparison.http_url_id }}</td>
+            <td>{{ stats[0].comparison.https_url_id }}</td>
+            <td>{{ stats[0].comparison.rank }}</td>
+            <td>{{ stats[0].comparison.code }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+<h1>Results</h1>
+<table class="table table-hover" style="margin-left: 10px">
+    <thead>
+    <tr>
+        <td>Actions</td>
+        <th>CID</th>
+        <th>HTTP URL</th>
+        <th>HTTPS URL</th>
+        <th>ID</th>
+        <th>Request Time</th>
+        <th>Result Time</th>
+        <th>IP</th>
+        <th>UserAgent</th>
+        <th>Validity</th>
+        <th>Reason</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for stat in stats %}
+        <tr>
+            <td><button class="btn btn-default btn-xs reopen" data-http-url="{{ stat.comparison.http_url }}" data-https-url="{{ stat.comparison.https_url }}">Reopen</button></td>
+            <td><a href={{ url_for("results", cid=stat.comparison_id) }}>{{ stat.comparison.id }}</a></td>
+            <td>{{ stat.comparison.http_url }}</td>
+            <td>{{ stat.comparison.https_url }}</td>
+            <td>{{ stat.id }}</td>
+            <td data-toggle="tooltip" title="{{ stat.req_time }}">{{ stat.req_time|string|truncate(10,True) }}</td>
+            <td data-toggle="tooltip" title="{{ stat.res_time }}">{{ stat.res_time|string|truncate(10,True) }}</td>
+            <td>{{ stat.ip }}</td>
+            <td data-toggle="tooltip" title="{{ stat.useragent }}">{{ stat.useragent|truncate(10,True) }}</td>
+            <td>{{ stat.validity|string }}</td>
+            {% if stat.validity == None %}
+                <td></td>
+            {% else %}
+                {% if not stat.reason %}
+                    <td>
+                        <div class="btn-group btn-group-xs" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Reason
+                                <span class="caret"></span>
+                            </button>
+                        <ul class="dropdown-menu">
+                        {% if stat.validity %}
+                            {% for reason in pos_reasons %}
+                                <li><a class="change_reason" href="javascript:void(0)" data-rid="{{ stat.id }}" data-reason="{{ reason }}">{{ reason }}</a></li>
+                            {% endfor %}
+                        {% else  %}
+                            {% for reason in neg_reasons %}
+                                <li><a class="change_reason" href="javascript:void(0)" data-rid="{{ stat.id }}" data-reason="{{ reason }}">{{ reason }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                        </ul>
+                        </div>
+                    </td>
+                {% else %}
+                    <td>{{ stat.reason }}</td>
+                {% endif %}
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+{% endblock %}

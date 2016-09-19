@@ -1,0 +1,13 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        # Make site accessible from http://localhost/
+        server_name .tlscompare.org;
+
+        location / { try_files $uri @tlscompare; }
+        location @tlscompare {
+            include uwsgi_params;
+            uwsgi_pass unix:/opt/tlscompare/tlscompare.sock;
+        }
+}

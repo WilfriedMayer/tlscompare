@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 id="title">Dataset Statistics</h1>
+
+{% for dataset in datasets %}
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Dataset Name</th>
+            <td colspan="2">{{ dataset.name }}</td>
+        </tr>
+            <tr>
+            <th>Total Rules</th>
+            <td colspan="2">{{ dataset['nr_comparisons'] }}</td>
+        </tr>
+        {% for results, count in dataset['nr_results'] %}
+            <tr>
+                <th width="33%">{{ results }} Results</th>
+                <td width="33%">{{ count }} Comparisons</td>
+                <td width="33%">{{ (count/dataset['nr_comparisons']*100)|round(2) }} %</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endfor %}
+
+{% endblock %}

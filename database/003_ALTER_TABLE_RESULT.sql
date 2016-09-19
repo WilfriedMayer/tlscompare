@@ -1,0 +1,5 @@
+ALTER TABLE results
+ADD COLUMN reason VARCHAR;
+
+ALTER TABLE results
+ADD COLUMN reason_changed BOOLEAN;

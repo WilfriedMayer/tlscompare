@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 id="title">Contact</h1>
+<div id="contact">
+    <h1>Please contact</h1>
+    <p>martin.mulazzani (at) tuwien.ac.at   or   wmayer (at) sba-research.org</p>
+    <p>or</p>
+    <p><a href=https://twitter.com/tlscompare>@tlscompare</a> on Twitter</p>
+</div>
+<div style="padding-top: 10px">
+    <h1>This is part of a project by</h1>
+    <a href="https://www.tuwien.ac.at/"><img src="{{ url_for('static', filename='tu_logo.png') }}" alt="Vienna University of Technology" style="width: 200px; padding-bottom: 10px"/></a>
+    <a href="https://www.sba-research.org/"><img src="{{ url_for('static', filename='sba_logo.png') }}" alt="SBA Research" style="width: 200px;"/></a>
+</div>
+{% endblock %}
